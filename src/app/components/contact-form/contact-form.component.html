@@ -1,0 +1,36 @@
+<div class = "row">
+    <div class = "col -lg-6">
+        <h4>Contact Form</h4>
+        <form [formGroup]="contactForm" (submit)="onSubmit()">
+            <div class = "mb-3">
+                <label for = 'name'>Name : </label>
+                <input type = "text" class = "form-control" id = "name" placeholder = "Name" formControlName = "name">
+                @if (contactForm.get('name')?.hasError('required') && contactForm.get('name')?.touched) {
+                    <div class = "form-text text-danger tw-bold">Name is Required</div>}
+            </div>
+
+            <div class = "mb-3">
+                <label for = 'email'>Email : </label>
+                <input type = "text" class = "form-control" id = "email" placeholder = "email" formControlName = "email">
+                @if(contactForm.get('email')?.hasError('required') && contactForm.get('email')?.touched) {
+                    <div class = "form-text text-danger tw-bold">Email is Required</div>}
+            </div>
+
+            <div class = "mb-3">
+                <label for = 'mobile'>Mobile : </label>
+                <input type = "text" class = "form-control" id = "mobile" placeholder = "mobile" formControlName = "mobile">
+                @if(contactForm.get('mobile')?.hasError('required') && contactForm.get('mobile')?.touched) {
+                    <div class = "form-text text-danger tw-bold">Mobile Should Be 10 Digit Numbers Only</div>}
+            </div>
+
+            <div class = "mb-3">
+                <label for = 'message'>Message : </label>
+                <textarea class = "form-control" id = "message" placeholder = "Message" formControlName = "message"></textarea>
+            </div>
+
+            <div>
+                <button type = "submit" class = "btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
