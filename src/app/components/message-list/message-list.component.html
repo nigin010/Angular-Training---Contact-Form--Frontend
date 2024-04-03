@@ -1,1 +1,64 @@
-<p>message-list works!</p>
+<h3>Message List</h3>
+<br>
+<div>
+ 
+    @if(showAlert){
+        <div style="position:fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center;">
+            <div class="alert alert-danger">
+                <p>Are you sure you want to delete this message?</p>
+                <button (click)="confirm()" class="btn-danger btn-sm mx-2">Yes</button>
+                <button (click)="cancel()" class="btn-warning btn-sm mx-2">No</button>
+            </div>
+        </div>
+    }
+</div>
+ 
+<div>
+    @if(showSuccessModal){
+        <div class="alert alert-success" role="alert">
+            Contact Deleted
+          </div>          
+    }
+</div>
+
+<div>
+    @if(showFailureModal){
+        <div class="alert alert-failure" role="alert">
+            Error while deleting Contact
+          </div>          
+    }
+</div>
+ 
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Mobile</th>
+            <th scope="col">Message</th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr *ngFor="let message of messages">
+                <th scope="row">{{ message._id }}</th>
+                <td>{{ message.name }}</td>
+                <td>{{ message.email }}</td>
+                <td>{{ message.mobile }}</td>
+                <td>{{ message.message}}</td>
+                <td>
+                    <button type="button" class="btn btn-info btn-sm mx-2" (click)="onEditMessage(message)">Edit</button>
+                    <button type="button" class="btn btn-danger btn-sm mx-2" (click)="deleteMessage(message._id)">Delete</button>
+                </td>
+            </tr>
+    </tbody>
+</table>
+
+@if (edit&&editMessage){
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1;">
+     <div class="alert bg-light" style="width: 500px; ">
+       <app-contact-form (onEditClose)="onEditClose($event)"  [message]="editMessage"></app-contact-form>
+     </div>
+    </div>
+  }
+  
